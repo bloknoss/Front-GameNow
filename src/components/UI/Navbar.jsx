@@ -27,9 +27,12 @@ export default function Navbar() {
   }
 
   useEffect(() => {
-    (async () => {
-      setLogged(await auth.isLogged());
-    })();
+    axios.defaults.baseURL = 'https://ec2-44-194-230-54.compute-1.amazonaws.com:8081/';
+
+
+      (async () => {
+        setLogged(await auth.isLogged());
+      })();
 
   }, []);
 
