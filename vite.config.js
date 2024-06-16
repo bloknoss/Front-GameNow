@@ -7,7 +7,7 @@ import path from "path";
 import child_process from "child_process";
 import { env } from "process";
 
-const baseFolder = `C:\\Users\\Álvaro\\.aspnet\\https`;
+const baseFolder = `~/.aspnet/https`;
 
 const certificateName = "gamenow.client";
 const certFilePath = path.join(baseFolder, `${certificateName}.pem`);
