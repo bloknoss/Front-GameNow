@@ -4,6 +4,7 @@ import { useState } from "react";
 import GoogleButton from "react-google-button";
 import { useAuth } from "../hooks/AuthProvider";
 import { data } from "autoprefixer";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -15,6 +16,7 @@ export default function Login() {
     const value = event.target.value;
     setFormData((values) => ({ ...values, [name]: value }));
   };
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -77,22 +79,14 @@ export default function Login() {
         </div>
 
         <div className="mt-6 gap-4 flex flex-col">
-          <button
+          <Link
+            to="/register"
             type="button"
-            className="py-3 rounded-none flex justify-center gap-2 items-center bg-blue-500 focus:ring-offset-gray-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 "
+            className="py-3 rounded-none flex justify-center gap-2 items-center bg-blue-500 focus:ring-offset-gray-200 text-white w-full transition ease-in duration-200 text-center text-base shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 "
           >
-            <Google className=""></Google>
-            <p className=" font-extralight">Iniciar Sesión con Google</p>
-          </button>
-          <button
-            type="button"
-            className="py-3 rounded-none flex justify-center gap-2 items-center bg-[#24292E] focus:ring-offset-gray-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 "
-          >
-            <GitHub className=""></GitHub>
-            <p className=" font-extralight text-center">
-              Iniciar Sesión con GitHub
-            </p>
-          </button>
+            <p className="font-duru">Registro</p>
+          </Link>
+
         </div>
       </div>
     </div>

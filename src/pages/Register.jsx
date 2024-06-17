@@ -153,29 +153,6 @@ export default function Register() {
             </button>
           </div>
         </form>
-
-        <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
-          <p className="mx-4 mb-0 text-center font-extralight dark:text-neutral-200">
-            O
-          </p>
-        </div>
-
-        <div className="mt-6 gap-4 flex flex-col">
-          <button
-            type="button"
-            className="py-3 rounded-none flex justify-center gap-2 items-center bg-blue-500 focus:ring-offset-gray-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2"
-          >
-            <Google className=""></Google>
-            <p className="font-extralight">Registrar con Google</p>
-          </button>
-          <button
-            type="button"
-            className="py-3 rounded-none flex justify-center gap-2 items-center bg-[#24292E] focus:ring-offset-gray-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2"
-          >
-            <GitHub className=""></GitHub>
-            <p className="font-extralight text-center">Registrar con GitHub</p>
-          </button>
-        </div>
       </div>
     </div>
   );
