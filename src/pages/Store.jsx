@@ -39,7 +39,7 @@ const Store = () => {
 
     return (
         <section id="store" className="p-8 dark:bg-secondaryDark m-5 bg-gray-100">
-            <h2 className="text-3xl font-bold text-center text-white font-duru mb-8">Store</h2>
+            <h2 className="text-3xl font-bold text-center text-white font-duru mb-8">Tienda</h2>
             <div className="grid md:grid-cols-3 gap-8">
                 {paginatedGames.map(game => (
                     <GameCard key={game.Id} game={game} />

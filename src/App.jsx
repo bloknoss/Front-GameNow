@@ -48,7 +48,7 @@ export default function App() {
               <Route path="/login" element={<Login />} />
 
               <Route path="/checkout" element={<Checkout />} />
-              2
+              
 
 
               { /* Admin Routes* */}

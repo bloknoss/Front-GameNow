@@ -1,32 +1,43 @@
 import axios from "axios";
 import { Facebook, Google, GitHub } from "@mui/icons-material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GoogleButton from "react-google-button";
 import { useAuth } from "../hooks/AuthProvider";
 import { data } from "autoprefixer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Error from "../assets/cross.png"
 
 export default function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
-
+  const [error, setError] = useState(false);
   const auth = useAuth();
-
+  const navigation = useNavigate()
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
     setFormData((values) => ({ ...values, [name]: value }));
   };
 
+  useEffect(() => {
+    (async () => {
+      if (await auth.isLogged()) {
+        navigation("/");
+      }
+    })()
+  }, [])
 
-  const handleSubmit = (event) => {
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("hey");
 
-    auth.login(formData);
+    const res = auth.login(formData);
+    setError(true)
+
+
   };
 
   return (
-    <div className="px-4 py-16 w-full  mt-24 mb-20  flex items-center justify-center sm:px-6 lg:px-8">
+    <div className="px-4 py-16 w-full  mt-24 mb-20  flex flex-col items-center justify-center sm:px-6 lg:px-8">
       <div className="bg-white rounded-2xl dark:bg-menu dark:border-l-menu border-1 p-8 shadow-2xl w-full max-w-md">
         <h2 className="text-2xl font-poppins dark:text-white font-semibold text-center mb-6">Iniciar Sesión</h2>
         <form onSubmit={handleSubmit}>
@@ -40,7 +51,7 @@ export default function Login() {
               type="email"
               name="email"
               onChange={handleChange}
-              placeholder="Email"
+              placeholder="example@gmail.com"
             />
           </div>
           <div className="mb-6">
@@ -63,12 +74,7 @@ export default function Login() {
             >
               Iniciar Sesión
             </button>
-            <a
-              className="inline-block align-baseline font-poppins text-sm text-blue-500 hover:text-blue-800"
-              href="#"
-            >
-              ¿Olvidaste tu contraseña?
-            </a>
+
           </div>
         </form>
 
@@ -88,7 +94,24 @@ export default function Login() {
           </Link>
 
         </div>
+
       </div>
+      {error && (
+        <div
+          className="rounded gap-3 flex items-center justify-center flex-col mt-10 container max-w-md text-left py-10 mb-10 bg-red-300"
+        >
+          <img
+            className="rounded-xl max-w-[50px]"
+            src={Error}
+            alt=""
+          />
+
+          <ul>
+            <li>No se ha podido iniciar la sesión</li>
+          </ul>
+
+        </div>
+      )}
     </div>
   );
 }

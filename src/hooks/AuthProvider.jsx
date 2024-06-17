@@ -2,6 +2,7 @@ import { Token } from "@mui/icons-material";
 import axios from "axios";
 import { useContext, createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 import Cookies from "universal-cookie";
 
 const AuthContext = createContext();
@@ -9,6 +10,7 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const cookies = new Cookies();
   const navigate = useNavigate();
+
   const [user, setUser] = useState(null);
   const [logged, setLogged] = useState(null);
   const [token, setToken] = useState(cookies.get("token") || "");
@@ -26,10 +28,13 @@ const AuthProvider = ({ children }) => {
 
         cookies.set("token", response.data);
         setAuthHeader(response.data);
+
         navigate("/");
-        window.location.reload();
+        document.location.reload();
       });
-    } catch (err) { }
+    } catch (err) {
+      return err.response?.data;
+    }
   };
 
   const register = async (data) => {
@@ -75,19 +80,26 @@ const AuthProvider = ({ children }) => {
     await axios
       .get("/api/auth/admin")
       .then((res) => {
-        console.log("Logged In!");
+        console.log("test!");
         test = true;
       })
       .catch((err) => {
+        console.log(err.response.data)
         return err.response?.data;
       });
 
     return test;
   };
 
+  const getJwt = () => {
+    if (token)
+      return jwtDecode(token);
+
+  }
+
   return (
     <AuthContext.Provider
-      value={{ token, user, login, logOut, register, logged, isAdmin, isLogged, setAuthHeader }}
+      value={{ token, user, login, logOut, register, logged, isAdmin, isLogged, getJwt, setAuthHeader }}
     >
       {children}
     </AuthContext.Provider>

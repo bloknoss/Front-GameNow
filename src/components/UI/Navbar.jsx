@@ -6,9 +6,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Button from "../Button";
 import SettingsButton from "../SettingsButton";
+import { button } from "@material-tailwind/react";
 
 export default function Navbar() {
   const [logged, setLogged] = useState(false);
+  const [name, setName] = useState(false);
+  const [admin, setAdmin] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
   const auth = useAuth();
   auth.setAuthHeader();
@@ -30,9 +33,13 @@ export default function Navbar() {
     //axios.defaults.baseURL = 'https://ec2-44-194-230-54.compute-1.amazonaws.com:8081/';
 
 
-      (async () => {
-        setLogged(await auth.isLogged());
-      })();
+    (async () => {
+      const jwt = auth.getJwt();
+      setLogged(await auth.isLogged());
+      setAdmin(await auth.isAdmin());
+      setName(jwt.userName)
+      console.log(await auth.isAdmin())
+    })();
 
   }, []);
 
@@ -117,21 +124,13 @@ export default function Navbar() {
             </li>
           </div>
           <div className="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0">
-            <SettingsButton></SettingsButton>
             <div className="inline-flex rounded-full">
               {logged === false ? (
 
-                <Button text={"Sign In"} to="/login">
-                </Button>
+                <Link to="/login" className="bg-gray-700 p-3 rounded-2xl">Sign In</Link>
               ) : (
                 <div className="flex gap-4">
-                  <div
-                    href="#"
-                    onClick={auth.logOut}
-                    className="inline-flex items-center px-4 py-2 text-base text-gray-900 bg-red-500 border border-transparent rounded-full cursor-pointer font-base hover:bg-gray-50 "
-                  >
-                    Sign Out
-                  </div>
+                  <SettingsButton logout={auth.logOut} isAdmin={admin} isLogged={logged} userName={name}></SettingsButton>
                 </div>
               )}
             </div>
