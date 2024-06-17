@@ -20,6 +20,7 @@ import LoggedRoute from "./hooks/LoggedRoute";
 import GameInsert from "./pages/Admin/Game/GameInsert";
 import User from "./pages/Specific/User";
 import UserInsert from "./pages/Admin/User/UserInsert";
+import Community from "./pages/Community";
 
 export default function App() {
 
@@ -32,6 +33,8 @@ export default function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/store" element={<Store />} />
+              <Route path="/community" element={<Community />} />
+
               <Route path="/library" element={
 
                 <LoggedRoute>
@@ -48,7 +51,7 @@ export default function App() {
               <Route path="/login" element={<Login />} />
 
               <Route path="/checkout" element={<Checkout />} />
-              
+
 
 
               { /* Admin Routes* */}

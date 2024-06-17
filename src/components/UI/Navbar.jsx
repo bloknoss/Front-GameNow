@@ -30,7 +30,7 @@ export default function Navbar() {
   }
 
   useEffect(() => {
-    //axios.defaults.baseURL = 'https://ec2-44-194-230-54.compute-1.amazonaws.com:8081/';
+    axios.defaults.baseURL = 'https://ec2-44-194-230-54.compute-1.amazonaws.com:8081/';
 
 
     (async () => {

@@ -53,17 +53,6 @@ export default function Home(props) {
         </div>
       </section>
 
-      <section id="features" className="p-8 dark:text-white dark:bg-primaryDark bg-gray-100">
-        <h2 className="text-3xl font-bold text-center mb-8">Features</h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <div key={index} className="bg-white dark:bg-secondaryDark dark:text-white p-6 rounded-lg shadow-lg">
-              <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
-              <p>{feature.description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
 
       <section id="testimonials" className="p-8 dark:text-white bg-white dark:bg-secondaryDark">
         <h2 className="text-3xl font-bold text-center mb-8">Reseñas</h2>

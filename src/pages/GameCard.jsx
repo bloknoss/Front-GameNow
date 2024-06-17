@@ -1,8 +1,10 @@
 // src/components/GameCard.js
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const GameCard = ({ game, owned }) => {
 
+    
     useEffect(() => {
         console.log(game)
     }, [])
@@ -10,7 +12,7 @@ const GameCard = ({ game, owned }) => {
     return (
         <div className="bg-white dark:bg-primaryDark p-6 rounded-lg shadow-lg">
             <img src={game.image} alt={game.name} className="w-full object-fillh-48 mb-4 rounded-lg" />
-            <h3 className="text-xl dark:text-white font-bold mb-2">{game.name}</h3>
+            <Link to="/game" state={{ id: game.id }} className="text-xl dark:text-white font-bold mb-2">{game.name}</Link>
             <p className="text-gray-700 dark:text-gray-200 mb-2">{game.description}</p>
             {
                 owned ? <div>
