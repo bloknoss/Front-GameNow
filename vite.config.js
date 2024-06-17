@@ -34,7 +34,8 @@ if (!fs.existsSync(certFilePath) || !fs.existsSync(keyFilePath)) {
   }
 }
 
-const target = "https://ec2-44-194-230-54.compute-1.amazonaws.com:8081/";
+const dockerTarget = "https://ec2-44-194-230-54.compute-1.amazonaws.com:8081/"
+const target = "https://localhost:7293/";
 
 // https://vitejs.dev/config/
 export default defineConfig({

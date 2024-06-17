@@ -1,11 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useNavigation } from 'react-router-dom';
 
 export default function ControlPanelUser() {
     const [users, setUsers] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [usersPerPage] = useState(10); // Number of users per page
+    const navigation = useNavigate()
+
 
     useEffect(() => {
         axios.get("/api/User/GetUsers").then((response) => {
@@ -14,15 +16,20 @@ export default function ControlPanelUser() {
     }, []);
 
     const handleRemove = (id) => {
+        console.log(id)
         setUsers(users.filter(user => user.id !== id));
+
+        axios.delete("/api/User/DeleteUser", {
+            params: {
+                id: id
+            }
+        })
     };
 
-    // Get current users
     const indexOfLastUser = currentPage * usersPerPage;
     const indexOfFirstUser = indexOfLastUser - usersPerPage;
     const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
 
-    // Change page
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
@@ -47,15 +54,17 @@ export default function ControlPanelUser() {
                                 <td className="py-2 px-4">{user.gamesPlayed}</td>
                                 <td className="py-2 px-4">
                                     <div className="px-6 py-4 flex flex-col gap-3">
-                                        <Link to="/user" state={{ id: user.email }} className="font-medium text-green-600 hover:underline">View</Link>
+                                        <Link to="/user" state={{ id: user.id }} className="font-medium text-green-600 hover:underline">View</Link>
                                         <Link onClick={() => handleRemove(user.id)} href="#" className="font-medium text-red-600 hover:underline">Remove</Link>
-                                        <Link to="/admin/users/edit" state={{ id: user.email }} className="font-medium text-blue-600 hover:underline">Edit</Link>
+                                        <Link to="/admin/users/edit" state={{ id: user.id }} className="font-medium text-blue-600 hover:underline">Edit</Link>
                                     </div>
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
+                <button onClick={() => (navigation("/admin/users/insert"))} className='mt-5 mb-5 rounded-xl font-poppins transition-all hover:bg-green-300 text-black h-10 w-full bg-green-400'>Insertar</button>
+
             </div>
             <Pagination usersPerPage={usersPerPage} totalUsers={users.length} paginate={paginate} />
         </div>

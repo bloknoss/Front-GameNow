@@ -17,6 +17,9 @@ import UserEdit from "./pages/Admin/User/UserEdit";
 import ControlPanelUser from "./pages/Admin/ControlPanelUser";
 import Checkout from "./pages/Checkout";
 import LoggedRoute from "./hooks/LoggedRoute";
+import GameInsert from "./pages/Admin/Game/GameInsert";
+import User from "./pages/Specific/User";
+import UserInsert from "./pages/Admin/User/UserInsert";
 
 export default function App() {
 
@@ -57,6 +60,15 @@ export default function App() {
                   </AdminRoute>
                 }
               />
+              <Route
+                path="/admin/games/insert"
+                element={
+                  <AdminRoute>
+                    <GameInsert />
+                  </AdminRoute>
+                }
+              />
+
               <Route path="/admin/games/edit" element={
                 <AdminRoute>
                   <GameEdit />
@@ -71,6 +83,17 @@ export default function App() {
               <Route path="/admin/users/edit" element={
                 <AdminRoute>
                   <UserEdit />
+                </AdminRoute>
+              } />
+              <Route path="/admin/users/insert" element={
+                <AdminRoute>
+                  <UserInsert />
+                </AdminRoute>
+              } />
+
+              <Route path="/user" element={
+                <AdminRoute>
+                  <User />
                 </AdminRoute>
               } />
             </Routes>

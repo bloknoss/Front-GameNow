@@ -26,7 +26,7 @@ export default function Login() {
   };
 
   return (
-    <div className="px-4 py-16 w-full flex items-center justify-center sm:px-6 lg:px-8">
+    <div className="px-4 py-16 w-full  mt-24 mb-20  flex items-center justify-center sm:px-6 lg:px-8">
       <div className="bg-white rounded-2xl dark:bg-menu dark:border-l-menu border-1 p-8 shadow-2xl w-full max-w-md">
         <h2 className="text-2xl font-poppins dark:text-white font-semibold text-center mb-6">Iniciar Sesión</h2>
         <form onSubmit={handleSubmit}>

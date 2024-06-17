@@ -1,11 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function ControlPanelGame() {
     const [games, setGames] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [gamesPerPage] = useState(10); // Number of games per page
+    const navigation = useNavigate();
 
     useEffect(() => {
         axios.get("/api/Game/GetGames").then((response) => {
@@ -15,6 +16,11 @@ export default function ControlPanelGame() {
 
     const handleRemove = (id) => {
         setGames(games.filter(game => game.id !== id));
+        axios.delete("/api/Game/DeleteGame", {
+            params: {
+                id: id
+            }
+        })
     };
 
     // Get current games
@@ -60,8 +66,9 @@ export default function ControlPanelGame() {
                         ))}
                     </tbody>
                 </table>
+                <button onClick={() => (navigation("/admin/games/insert"))} className='mt-5 mb-5 rounded-xl font-poppins transition-all hover:bg-green-300 text-black h-10 w-full bg-green-400'>Insertar</button>
             </div>
-                <Pagination gamesPerPage={gamesPerPage} totalGames={games.length} paginate={paginate} />
+            <Pagination gamesPerPage={gamesPerPage} totalGames={games.length} paginate={paginate} />
         </div>
     );
 };

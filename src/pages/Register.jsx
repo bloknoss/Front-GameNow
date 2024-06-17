@@ -42,34 +42,6 @@ export default function Register() {
 
   return (
     <div className="px-4 py-16 w-full flex flex-col items-center justify-center sm:px-6 lg:px-8">
-      {status && (
-        <div
-          className={`rounded gap-3 text-center flex items-center justify-center flex-col container max-w-md text-left py-10 mb-10 ${status.success ? "bg-green-500" : "bg-red-300"
-            }`}
-        >
-          <img
-            className="rounded-xl max-w-[50px]"
-            src={status.success ? Success : Error}
-            alt=""
-          />
-          {status.success ? (
-            <div>
-              <strong>
-                <p>Success</p>
-              </strong>
-              <p>An email has been sent to your email address.</p>
-            </div>
-          ) : (
-            <ul>
-              {status.errors.map((error, index) => (
-                <li key={index} className="font-light">
-                  {error.description || error}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      )}
 
       <div className="bg-white rounded-2xl dark:bg-menu dark:border-l-menu border-1 p-8 shadow-2xl w-full max-w-md">
         <h2 className="text-2xl font-poppins dark:text-white font-semibold text-center mb-6">
@@ -153,7 +125,37 @@ export default function Register() {
             </button>
           </div>
         </form>
+
       </div>
+      {status && (
+        <div
+          className={`rounded gap-3 text-center flex items-center justify-center flex-col mt-10 container max-w-md text-left py-10 mb-10 ${status.success ? "bg-green-500" : "bg-red-300"
+            }`}
+        >
+          <img
+            className="rounded-xl max-w-[50px]"
+            src={status.success ? Success : Error}
+            alt=""
+          />
+          {status.success ? (
+            <div>
+              <strong>
+                <p>Success</p>
+              </strong>
+              <p>An email has been sent to your email address.</p>
+            </div>
+          ) : (
+            <ul>
+              {status.errors.map((error, index) => (
+                <li key={index} className="font-light">
+                  {error.description || error}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
+
     </div>
   );
 }

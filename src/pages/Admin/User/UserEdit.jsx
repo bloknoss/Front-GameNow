@@ -9,8 +9,9 @@ export default function UserEdit() {
     const { id } = location.state;
 
     useEffect(() => {
+
         axios.get("/api/User/GetUser", {
-            params: { email: id }
+            params: { id: id }
         }).then((res) => setUser(res.data));
     }, [id]);
 
@@ -109,7 +110,7 @@ export default function UserEdit() {
                                     />
                                 ) : (
                                     <input
-                                        type={key === 'email' ? 'email' : key === 'releaseDate' ? 'date' : 'text'}
+                                        type={key === 'email' ? 'email' : key === 'lockoutEnd' ? 'date' : 'text'}
                                         name={key}
                                         value={formData[key]}
                                         onChange={handleChange}
